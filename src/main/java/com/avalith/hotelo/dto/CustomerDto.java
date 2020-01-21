@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CustomerDTO extends AbstractDto {
+public class CustomerDto extends AbstractDto {
     @NotBlank(message = "{field_required}")
     private String identificationNumber;
     @NotBlank(message = "{field_required}")

@@ -1,7 +1,7 @@
 package com.avalith.hotelo.boundary.query;
 
 
-import com.avalith.hotelo.dto.CustomerDTO;
+import com.avalith.hotelo.dto.CustomerDto;
 import com.avalith.hotelo.service.query.CustomerQueryService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List> findAll(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
-        List<CustomerDTO> careerDtoList = customerQueryService.findAll(PageRequest.of(pageNumber, pageSize));
+        List<CustomerDto> careerDtoList = customerQueryService.findAll(PageRequest.of(pageNumber, pageSize));
         return new ResponseEntity<>(careerDtoList, HttpStatus.OK);
     }
 }

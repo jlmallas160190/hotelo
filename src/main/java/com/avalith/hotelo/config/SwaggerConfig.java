@@ -20,14 +20,14 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.regex("/(customer).*"))
+                .paths(PathSelectors.regex("/(user|login|customer).*"))
                 .build()
                 .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Kerno Store " + APPLICATION_VERSION)
+                .title("Hotelo " + APPLICATION_VERSION)
                 .description("Hotelo is an API for managing roms")
                 .version(APPLICATION_VERSION)
                 .build();

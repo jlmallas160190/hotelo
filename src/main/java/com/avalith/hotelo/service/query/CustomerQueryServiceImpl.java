@@ -1,6 +1,6 @@
 package com.avalith.hotelo.service.query;
 
-import com.avalith.hotelo.dto.CustomerDTO;
+import com.avalith.hotelo.dto.CustomerDto;
 import com.avalith.hotelo.exceptions.ConflictException;
 import com.avalith.hotelo.exceptions.NotFoundException;
 import com.avalith.hotelo.repository.CustomerRepository;
@@ -27,12 +27,12 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
     }
 
     @Override
-    public List<CustomerDTO> findAll(Pageable pageable) {
+    public List<CustomerDto> findAll(Pageable pageable) {
         try {
 
-            List<CustomerDTO> customerDTOList = customerRepository.findAll(pageable).stream().map(customer -> dozerBeanMapper.map(customer, CustomerDTO.class)).collect(Collectors.toList());
-            log.info("{} customer fetched!", customerDTOList.size());
-            return customerDTOList;
+            List<CustomerDto> customerDtoList = customerRepository.findAll(pageable).stream().map(customer -> dozerBeanMapper.map(customer, CustomerDto.class)).collect(Collectors.toList());
+            log.info("{} customer fetched!", customerDtoList.size());
+            return customerDtoList;
         } catch (ConflictException | NotFoundException e) {
             log.error("{}", e);
             throw e;
@@ -43,12 +43,12 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
     }
 
     @Override
-    public List<CustomerDTO> findAllBy(Long aLong) {
+    public List<CustomerDto> findAllBy(Long aLong) {
         throw new NotFoundException("Service not available");
     }
 
     @Override
-    public List<CustomerDTO> findAllBy(Object... params) {
+    public List<CustomerDto> findAllBy(Object... params) {
         throw new NotFoundException("Service not available");
     }
 }
