@@ -29,7 +29,6 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
     @Override
     public List<CustomerDto> findAll(Pageable pageable) {
         try {
-
             List<CustomerDto> customerDtoList = customerRepository.findAll(pageable).stream().map(customer -> dozerBeanMapper.map(customer, CustomerDto.class)).collect(Collectors.toList());
             log.info("{} customer fetched!", customerDtoList.size());
             return customerDtoList;

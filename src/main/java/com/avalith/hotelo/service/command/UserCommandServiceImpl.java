@@ -37,16 +37,13 @@ public class UserCommandServiceImpl implements UserCommandService {
         return userOptional.isPresent();
     }
 
+    private boolean usernameChanged(String oldUsername, String usernameToUpdate) {
+        return !oldUsername.equals(usernameToUpdate);
+    }
+
     private User mergeRequestToEntity(UserDto source, User destination) {
         dozerBeanMapper.map(source, destination);
         return destination;
-    }
-
-    private void validatePassword(User user, UserDto userDto) {
-        if (!isPasswordCorrect(userDto.getPassword())) {
-            throw new ConflictException("Password invalid!");
-        }
-
     }
 
     @Override
@@ -55,6 +52,9 @@ public class UserCommandServiceImpl implements UserCommandService {
             User userMerged = dozerBeanMapper.map(data, User.class);
             if (!isPasswordCorrect(data.getPassword())) {
                 throw new ConflictException("Password invalid!");
+            }
+            if (alreadyExistsUsername(data.getUsername())) {
+                throw new ConflictException("Username already exists!");
             }
             userMerged.setPassword(passwordService.generatePassword(data.getPassword()));
             User userCreated = userRepository.save(userMerged);
@@ -80,6 +80,9 @@ public class UserCommandServiceImpl implements UserCommandService {
             User userMerged = mergeRequestToEntity(data, userOptional.get());
             if (data.getPassword() != null && !isPasswordCorrect(data.getPassword())) {
                 throw new ConflictException("Password invalid!");
+            }
+            if (usernameChanged(userOptional.get().getUsername(), data.getUsername()) && alreadyExistsUsername(data.getUsername())) {
+                throw new ConflictException("Username already exists!");
             }
             userMerged.setPassword(passwordService.generatePassword(data.getPassword()));
             User userUpdated = userRepository.save(userMerged);

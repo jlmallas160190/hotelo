@@ -25,4 +25,8 @@ public class Room extends AbstractEntity {
     private Section section;
     @Enumerated(EnumType.STRING)
     private RoomStatusEnum status;
+
+    public Room() {
+        this.status = RoomStatusEnum.AVAILABLE;
+    }
 }

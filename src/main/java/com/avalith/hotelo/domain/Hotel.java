@@ -16,4 +16,13 @@ public class Hotel extends AbstractEntity {
     private String email;
     @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Location> locations = new ArrayList<>();
+
+    public void addLocation(Location locationToAdd) {
+        boolean contains = locations.stream().filter(Location::getActive).anyMatch(location ->
+                location.equals(locationToAdd));
+        if (!contains) {
+            locations.add(locationToAdd);
+            locationToAdd.setHotel(this);
+        }
+    }
 }

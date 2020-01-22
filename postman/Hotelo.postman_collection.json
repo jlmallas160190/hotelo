@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "0a2f3a73-067b-444f-840f-d83076c3c9d5",
+    "name": "Hotelo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "createUser",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n \"username\":\"jomasloja@gmail.com\",\n \"password\":\"Hotelo123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/user",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"jomasloja@gmail.com\",\n    \"password\": \"Hotelo123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "customer",
+      "item": [
+        {
+          "name": "fetchCustomers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/customer",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "customer"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "hotel",
+      "item": [
+        {
+          "name": "createHotel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jomasloja@gmail.com\",\n  \"locationDtoList\": [\n    {\n      \"address\": \"Las Palmas\",\n      \"city\": \"Loja\",\n      \"name\": \"Matriz\",\n      \"phone\": \"string\",\n      \"postalCode\": \"1100\",\n      \"sectionDtoList\": [\n        {\n          \"name\": \"Primer piso\",\n          \"roomDtoList\": [\n            {\n              \"bedNumber\": 2,\n              \"name\": \"101\",\n              \"priceDtoList\": [\n                {\n                  \"name\": \"Precio 1\",\n                  \"price\": 50.00,\n                  \"priceOrder\": 1\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"name\": \"Hotel Sonesta\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/customer",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "customer"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
