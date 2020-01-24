@@ -29,8 +29,9 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/**","/login/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/**", "/login/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/user/**").permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated();
     }
 }

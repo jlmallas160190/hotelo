@@ -21,4 +21,13 @@ public class Location extends AbstractEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Hotel hotel;
+
+    public void addSection(Section sectionToAdd) {
+        boolean contains = sections.stream().filter(Section::getActive).anyMatch(section ->
+                section.equals(sectionToAdd));
+        if (!contains) {
+            sections.add(sectionToAdd);
+            sectionToAdd.setLocation(this);
+        }
+    }
 }
