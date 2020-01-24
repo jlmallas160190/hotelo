@@ -29,4 +29,14 @@ public class Room extends AbstractEntity {
     public Room() {
         this.status = RoomStatusEnum.AVAILABLE;
     }
+
+    public void addPrice(Price priceToAdd) {
+        boolean contains = prices.stream().filter(Price::getActive).anyMatch(price ->
+                price.equals(priceToAdd));
+        if (!contains) {
+            prices.add(priceToAdd);
+            priceToAdd.setRoom(this);
+        }
+    }
+
 }

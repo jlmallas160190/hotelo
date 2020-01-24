@@ -1,5 +1,6 @@
 package com.avalith.hotelo.dto;
 
+import com.avalith.hotelo.dto.room.RoomDto;
 import lombok.Data;
 
 import javax.validation.Valid;

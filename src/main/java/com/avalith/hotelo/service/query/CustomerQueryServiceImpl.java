@@ -1,5 +1,6 @@
 package com.avalith.hotelo.service.query;
 
+import com.avalith.hotelo.domain.Customer;
 import com.avalith.hotelo.dto.CustomerDto;
 import com.avalith.hotelo.exceptions.ConflictException;
 import com.avalith.hotelo.exceptions.NotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,12 +44,20 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
     }
 
     @Override
-    public List<CustomerDto> findAllBy(Long aLong) {
-        throw new NotFoundException("Service not available");
-    }
+    public Customer findCustomerById(Long id) {
+        try {
+            Optional<Customer> customerOptional = customerRepository.findById(id);
+            if (!customerOptional.isPresent()) {
+                throw new NotFoundException(String.format("The customer with the id %s not found!", id));
+            }
+            return customerOptional.get();
 
-    @Override
-    public List<CustomerDto> findAllBy(Object... params) {
-        throw new NotFoundException("Service not available");
+        } catch (ConflictException | NotFoundException ex) {
+            log.error("{}", ex);
+            throw ex;
+        } catch (Exception ex) {
+            log.error("{}", ex);
+            throw new ConflictException(ex.getMessage());
+        }
     }
 }

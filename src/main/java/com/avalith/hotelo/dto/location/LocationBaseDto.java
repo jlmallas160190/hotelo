@@ -1,14 +1,14 @@
-package com.avalith.hotelo.dto;
+package com.avalith.hotelo.dto.location;
 
+import com.avalith.hotelo.dto.AbstractDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
-public class LocationDto extends AbstractDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class LocationBaseDto extends AbstractDto {
     @NotBlank(message = "{field_required}")
     private String name;
     @NotBlank(message = "{field_required}")
@@ -18,6 +18,4 @@ public class LocationDto extends AbstractDto {
     private String postalCode;
     @NotBlank(message = "{field_required}")
     private String address;
-    @Valid
-    private List<SectionDto> sectionDtoList = new ArrayList<>();
 }

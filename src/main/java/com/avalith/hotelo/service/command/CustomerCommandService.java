@@ -1,4 +1,6 @@
 package com.avalith.hotelo.service.command;
 
-public interface CustomerCommandService {
+import com.avalith.hotelo.dto.CustomerDto;
+
+public interface CustomerCommandService extends BaseCommandService<CustomerDto, Long> {
 }

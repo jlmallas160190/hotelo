@@ -24,7 +24,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List> findAll(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
-        List<CustomerDto> careerDtoList = customerQueryService.findAll(PageRequest.of(pageNumber, pageSize));
-        return new ResponseEntity<>(careerDtoList, HttpStatus.OK);
+        List<CustomerDto> customerDtoList = customerQueryService.findAll(PageRequest.of(pageNumber, pageSize));
+        return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
     }
 }
