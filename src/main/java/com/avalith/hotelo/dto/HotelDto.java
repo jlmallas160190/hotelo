@@ -1,5 +1,7 @@
 package com.avalith.hotelo.dto;
 
+import com.avalith.hotelo.dto.location.LocationDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HotelDto extends AbstractDto {
     @NotBlank(message = "{field_required}")
     private String name;

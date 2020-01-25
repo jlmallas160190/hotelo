@@ -1,5 +1,6 @@
 package com.avalith.hotelo.domain;
 
+import com.avalith.hotelo.enums.RoomStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,6 +26,26 @@ public class Cart extends AbstractEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Location location;
-    @OneToOne
-    private Order order;
+
+    public void addCartItem(CartItem cartItemToAdd) {
+        boolean contains = cartItems.stream().filter(CartItem::getActive).anyMatch(cartItem ->
+                cartItem.equals(cartItemToAdd));
+        if (!contains) {
+            cartItems.add(cartItemToAdd);
+            cartItemToAdd.getRoom().setStatus(RoomStatusEnum.OCCUPIED);
+            cartItemToAdd.setCart(this);
+        }
+    }
+
+    public BigDecimal calculateTotal() {
+        return this.subtotal.add(this.tax).subtract(this.discount);
+    }
+
+    public BigDecimal calculateSubtotal() {
+        return this.cartItems.stream().map(CartItem::getTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal calculateTax() {
+        return this.cartItems.stream().map(CartItem::getTax).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }

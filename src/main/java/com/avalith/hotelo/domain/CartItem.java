@@ -7,6 +7,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Data
 @Entity
@@ -40,4 +41,18 @@ public class CartItem extends AbstractEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cart cart;
+
+    public BigDecimal calculateTotal() {
+        return this.getUnitPrice().multiply(new BigDecimal(this.quantity));
+    }
+
+    public Integer calculateQuantity() {
+        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        // at least one day if the room is vacated early
+        if (diff > 0 && diff < 1) {
+            return 1;
+        }
+        return Math.toIntExact(diff);
+    }
 }
