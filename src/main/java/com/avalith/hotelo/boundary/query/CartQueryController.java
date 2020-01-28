@@ -1,6 +1,6 @@
 package com.avalith.hotelo.boundary.query;
 
-import com.avalith.hotelo.dto.CartDto;
+import com.avalith.hotelo.dto.cart.CartDto;
 import com.avalith.hotelo.service.query.CartQueryService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;

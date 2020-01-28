@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   app:
-    container_name: avalith_hotelo
+    container_name: avalith-hotelo
     image: avalith_hotelo-img:1.0.0
     restart: always
     environment:
@@ -10,7 +10,7 @@ services:
       - 8080:8080
     networks:
       kerno-network:
-        ipv4_address: 172.19.0.1
+        ipv4_address: 172.19.0.10
 networks:
   kerno-network:
     external: true

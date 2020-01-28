@@ -20,7 +20,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.regex("/(user|login|customer|hotel|cart).*"))
+                .paths(PathSelectors.regex("/(user|login|customer|hotel|cart|order|room).*"))
                 .build()
                 .apiInfo(apiInfo());
     }

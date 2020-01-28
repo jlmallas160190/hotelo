@@ -2,6 +2,7 @@ package com.avalith.hotelo.domain;
 
 import com.avalith.hotelo.enums.OrderPaidStatusEnum;
 import com.avalith.hotelo.enums.OrderTypeEnum;
+import com.avalith.hotelo.enums.RoomStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,13 +21,13 @@ public class Order extends AbstractEntity {
     @Column(nullable = false)
     private Date issueDate;
     @Column(nullable = false)
-    private BigDecimal subtotal;
+    private BigDecimal subtotal = BigDecimal.ZERO;
     @Column(nullable = false)
-    private BigDecimal total;
+    private BigDecimal total = BigDecimal.ZERO;
     @Column(nullable = false)
-    private BigDecimal tax;
+    private BigDecimal tax = BigDecimal.ZERO;
     @Column(nullable = false)
-    private BigDecimal discount;
+    private BigDecimal discount = BigDecimal.ZERO;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderPaidStatusEnum paidStatus;
@@ -41,4 +42,15 @@ public class Order extends AbstractEntity {
     private Cart cart;
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetail> orderDetails = new ArrayList<>();
+
+    public void addDetail(OrderDetail orderDetailToAdd) {
+        boolean contains = orderDetails.stream().filter(OrderDetail::getActive).anyMatch(orderDetail ->
+                orderDetail.equals(orderDetailToAdd));
+        if (!contains) {
+            orderDetails.add(orderDetailToAdd);
+            orderDetailToAdd.getCartItem().getRoom().setStatus(RoomStatusEnum.AVAILABLE);
+            orderDetailToAdd.setOrder(this);
+        }
+    }
+
 }
