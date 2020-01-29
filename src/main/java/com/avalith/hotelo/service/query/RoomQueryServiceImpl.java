@@ -1,21 +1,30 @@
 package com.avalith.hotelo.service.query;
 
 import com.avalith.hotelo.domain.Room;
+import com.avalith.hotelo.dto.room.RoomDto;
 import com.avalith.hotelo.enums.RoomStatusEnum;
 import com.avalith.hotelo.exceptions.ConflictException;
 import com.avalith.hotelo.exceptions.NotFoundException;
 import com.avalith.hotelo.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class RoomServiceImpl implements RoomQueryService {
+public class RoomQueryServiceImpl implements RoomQueryService {
     private final RoomRepository roomRepository;
+    private DozerBeanMapper dozerBeanMapper;
+
+    @PostConstruct
+    public void init() {
+        dozerBeanMapper = new DozerBeanMapper();
+    }
 
     @Override
     public Room findRoomById(Long id) {
@@ -55,5 +64,18 @@ public class RoomServiceImpl implements RoomQueryService {
             throw new ConflictException(message);
         }
         return room;
+    }
+
+    @Override
+    public RoomDto findByID(Long id) {
+        try {
+            return dozerBeanMapper.map(findRoomById(id), RoomDto.class);
+        } catch (ConflictException | NotFoundException ex) {
+            log.error("{}", ex);
+            throw ex;
+        } catch (Exception ex) {
+            log.error("{}", ex);
+            throw new ConflictException(ex.getMessage());
+        }
     }
 }

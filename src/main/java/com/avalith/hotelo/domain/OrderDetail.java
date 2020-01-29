@@ -35,4 +35,5 @@ public class OrderDetail extends AbstractEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Order order;
+
 }

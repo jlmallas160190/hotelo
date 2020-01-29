@@ -107,6 +107,44 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "createCustomer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"string\",\n  \"email\": \"fraescaya10@gmail.com\",\n  \"firstName\": \"Francisco\",\n  \"identificationNumber\": \"string\",\n  \"lastName\": \"Carrilo\",\n  \"phone\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/customer",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "customer"
+              ]
+            }
+          },
+          "response": []
         }
       ],
       "protocolProfileBehavior": {}
@@ -147,6 +185,309 @@
               ],
               "path": [
                 "customer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fetchHotels",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/hotel",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "hotel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "findHotelById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/hotel/2",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "hotel",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "editHotel",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"id\":2,\n   \"active\":true,\n   \"name\":\"Hotel Sonesta\",\n   \"email\":\"jomasloja@gmail.com\",\n   \"locationDtoList\":[\n      {\n         \"id\":2,\n         \"active\":true,\n         \"name\":\"Matriz\",\n         \"phone\":\"string\",\n         \"city\":\"Loja\",\n         \"postalCode\":\"1100\",\n         \"address\":\"Las Palmas\",\n         \"sectionDtoList\":[\n            {\n               \"id\":2,\n               \"active\":true,\n               \"name\":\"Primer Piso\",\n               \"roomDtoList\":[\n                  {\n                     \"id\":2,\n                     \"active\":true,\n                     \"name\":\"101\",\n                     \"bedNumber\":2,\n                     \"priceDtoList\":[\n                        {\n                           \"name\":\"Precio 1\",\n                           \"price\":50.00,\n                           \"priceOrder\":1\n                        }\n                     ]\n                  }\n               ]\n            }\n         ]\n      }\n   ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/hotel/2",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "hotel",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "cart",
+      "item": [
+        {
+          "name": "createCart",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "9014e768-c35e-4ced-8745-2e1985215467",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartItemDtoList\": [\n    {\n      \"endDate\": \"2020-01-25T16:32:34.202Z\",\n      \"name\": \"string\",\n      \"roomBaseDto\": {\n        \"id\": 2,\n        \"name\":\"string\"\n      },\n      \"startDate\": \"2020-01-26T16:32:34.202Z\",\n      \"unitPrice\": 50\n    }\n  ],\n  \"discount\": 0,\n  \"locationDto\": {\n    \"id\": 2,\n    \"name\": \"string\",\n    \"city\":\"string\",\n    \"phone\":\"string\",\n    \"address\":\"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/cart",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "cartUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"subtotal\": 50.00,\n    \"total\": 50.00,\n    \"tax\": 0.00,\n    \"discount\": 0.00,\n    \"locationDto\": {\n        \"id\": 2,\n        \"active\": true,\n        \"name\": \"Matriz\",\n        \"phone\": \"string\",\n        \"city\": \"Loja\",\n        \"postalCode\": \"1100\",\n        \"address\": \"Las Palmas\"\n    },\n    \"cartItemDtoList\": [\n        {\n            \"id\": 1,\n            \"active\": true,\n            \"startDate\": 1579996800000,\n            \"endDate\": 1579910400000,\n            \"name\": \"string\",\n            \"unitPrice\": 50.00,\n            \"total\": 50.00,\n            \"tax\": 0.00,\n            \"roomBaseDto\": {\n                \"id\": 2,\n                \"active\": true,\n                \"name\": \"101\",\n                \"bedNumber\": 2,\n                \"status\": \"OCCUPIED\"\n            }\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/cart/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "cartFindById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/cart/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "cart",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "order",
+      "item": [
+        {
+          "name": "createOrder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartDto\": {\n    \"id\": 1\n  },\n  \"customerDto\": {\n    \"address\": \"string\",\n    \"email\": \"string\",\n    \"firstName\": \"string\",\n    \"id\": 1,\n    \"identificationNumber\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/order",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "order"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "findOrderById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/order/5",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "order",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "room",
+      "item": [
+        {
+          "name": "findRoomById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AUTHTOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/room/2",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "room",
+                "2"
               ]
             }
           },

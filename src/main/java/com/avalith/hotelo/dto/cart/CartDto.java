@@ -1,5 +1,6 @@
-package com.avalith.hotelo.dto;
+package com.avalith.hotelo.dto.cart;
 
+import com.avalith.hotelo.dto.AbstractDto;
 import com.avalith.hotelo.dto.location.LocationBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CartDto extends AbstractDto {
+public class CartDto extends CartBaseDto {
     @Min(value = 0, message = "{field_number_greater_zero}")
     @Digits(integer = 12, fraction = 2, message = "{invalid_number_format}")
     private BigDecimal subtotal = BigDecimal.ZERO;

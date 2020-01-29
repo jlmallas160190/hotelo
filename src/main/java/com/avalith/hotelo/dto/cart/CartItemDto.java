@@ -1,4 +1,4 @@
-package com.avalith.hotelo.dto;
+package com.avalith.hotelo.dto.cart;
 
 import com.avalith.hotelo.dto.room.RoomBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CartItemDto extends AbstractDto {
+public class CartItemDto extends CartItemBaseDto {
     @NotNull(message = "{field_null}")
     private Date startDate;
     @NotNull(message = "{field_null}")
